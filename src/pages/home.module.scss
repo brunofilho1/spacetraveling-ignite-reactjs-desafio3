@@ -1,1 +1,69 @@
-// TODO
+.postsMain {
+  width: 100%;
+
+  .postsSection {
+    max-width: 700px;
+    margin: 0 auto;
+
+    .post {
+      margin-top: 48px;
+
+      h1 {
+        color: var(--white);
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 34px;
+
+        text-align: justify;
+        letter-spacing: -0.5px;
+      }
+
+      legend {
+        margin-top: 8px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+
+        text-align: justify;
+        color: var(--gray-100);
+      }
+
+      .postInfos {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        margin-top: 25px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+
+        color: var(--gray-300);
+
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .showMoreBtn {
+      display: block;
+      margin-top: 64px;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+
+      text-align: justify;
+      color: var(--pink-900);
+    }
+  }
+}
