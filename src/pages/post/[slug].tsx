@@ -128,6 +128,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
     uid: response.uid,
     data: {
       title: response.data.title,
+      subtitle: response.data.subtitle,
       banner: {
         url: response.data.banner.url
       },
