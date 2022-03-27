@@ -9,6 +9,7 @@
       margin-top: 48px;
 
       h1 {
+        display: inline;
         color: var(--white);
         font-family: 'Inter';
         font-style: normal;
@@ -18,6 +19,12 @@
 
         text-align: justify;
         letter-spacing: -0.5px;
+
+        transition: color 0.2s;
+
+        &:hover {
+          color: var(--pink-900);
+        }
       }
 
       legend {
@@ -47,6 +54,12 @@
 
         color: var(--gray-300);
 
+        div {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
         span {
           margin-left: 8px;
         }
@@ -64,6 +77,9 @@
 
       text-align: justify;
       color: var(--pink-900);
+
+      background-color: transparent;
+      border: none;
     }
   }
 }

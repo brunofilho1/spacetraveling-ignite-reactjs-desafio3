@@ -31,6 +31,7 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 :root {
@@ -38,7 +39,7 @@ a {
 
   --gray-100: #d7d7d7;
   --gray-300: #bbbbbb;
-  --gray-900: #282c34;
+  --gray-900: #1a1d23;
 
   --pink-900: #ff57b2;
 }

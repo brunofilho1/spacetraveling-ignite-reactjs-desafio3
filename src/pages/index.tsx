@@ -37,7 +37,6 @@ export default function Home({ postsPagination }: HomeProps) {
     fetch(nextPage)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
       const newPosts = [
         ...posts,
         ...data.results
@@ -54,45 +53,50 @@ export default function Home({ postsPagination }: HomeProps) {
           <section className={styles.postsSection}>
             {posts.map(post => (
               <div key={post.uid} className={styles.post}>
-                <h1>{post.data.title}</h1>
+                <Link href={`/post/${post.uid}`}>
+                  <a><h1>{post.data.title}</h1></a>
+                </Link>
                 <legend>{post.data.subtitle}</legend>
                 <div className={styles.postInfos}>
-                  <div><FiCalendar /><span>{post.first_publication_date}</span></div>
+                <div><FiCalendar /><span>{
+                  format(
+                    new Date(post.first_publication_date),
+                    'dd MMM yyyy',
+                    {
+                      locale: ptBR,
+                    }
+                  )
+                }</span></div>
                   <div><FiUser /><span>{post.data.author}</span></div>
                 </div>
               </div>
             ))}
-            { nextPage ?
-              <Link href="/">
-                <a className={styles.showMoreBtn} onClick={showMorePosts}>Carregar mais posts</a>
-              </Link>
-            : '' }
+            { nextPage && (
+              <button className={styles.showMoreBtn} onClick={showMorePosts}>
+                Carregar mais posts
+              </button>
+              )
+            }
           </section>
         </main>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const prismic = getPrismicClient();
 
   const postsResponse = await prismic.query([
     Prismic.predicates.at('document.type', 'posts')
   ], {
-    fetch: ['posts.title', 'posts.subtitle', 'posts.author'],
+    fetch: ['post.title', 'post.subtitle', 'post.author'],
     pageSize: 2,
   });
 
   const results = postsResponse.results.map((post): Post => {
     return {
       uid: post.uid,
-      first_publication_date: format(
-        new Date(post.first_publication_date),
-        'dd MMM yyyy',
-        {
-          locale: ptBR,
-        }
-      ),
+      first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
@@ -101,14 +105,12 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
-  const postsPagination = {
-    next_page: postsResponse.next_page,
-    results: results
-  }
-
   return {
     props: {
-      postsPagination
+      postsPagination: {
+        next_page: postsResponse.next_page,
+        results: results
+      }
     }
   }
 };
